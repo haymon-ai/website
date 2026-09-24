@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      body {
+        position: relative;
+        background: var(--colors-chrome);
+      }
+
+      .og-copy {
+        position: absolute;
+        left: 72px;
+        top: 72px;
+        width: 520px;
+      }
+
+      .og-copy .brand {
+        font-size: 30px;
+        gap: 14px;
+      }
+
+      .og-copy h1 {
+        margin-top: 56px;
+        font-size: 50px;
+        line-height: 1.15;
+      }
+
+      .og-copy p {
+        margin-top: 24px;
+        font-size: 22px;
+        line-height: 32px;
+        color: var(--colors-muted-foreground);
+      }
+
+      .og-shot {
+        position: absolute;
+        left: 660px;
+        top: 96px;
+        width: 760px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="og-copy">
+      <span class="brand">
+        <img src="../assets/logo.svg" width="44" height="44" alt="" />
+        haymon
+      </span>
+      <h1>Control your software supply chain.</h1>
+      <p>A private package registry on your own server.</p>
+    </div>
+    <div class="og-shot window">
+      <div class="window-bar">
+        <span class="window-dots"><i></i><i></i><i></i></span>
+        <span class="window-url">haymon.ai</span>
+      </div>
+      <img src="../assets/screens/packages-1440.webp" width="1440" height="900" alt="" />
+    </div>
+  </body>
+</html>

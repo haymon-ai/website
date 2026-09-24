@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>haymon — private package registry for your software supply chain</title>
+    <meta
+      name="description"
+      content="Self-hosted private package registry that serves only the packages you let in. Mirrors Packagist, GitHub, GitLab and git for Composer today; npm next."
+    />
+    <link rel="canonical" href="https://haymon.ai/" />
+    <link rel="alternate" type="text/markdown" href="/index.html.md" />
+
+    <link
+      rel="preload"
+      href="assets/fonts/ibm-plex-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="haymon" />
+    <meta property="og:url" content="https://haymon.ai/" />
+    <meta property="og:title" content="haymon — private package registry for your software supply chain" />
+    <meta
+      property="og:description"
+      content="Control your software supply chain in the age of AI agents. haymon is a private registry on your own server that serves only the packages you've let in."
+    />
+    <meta property="og:image" content="https://haymon.ai/assets/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="haymon: control your software supply chain, beside the haymon packages overview" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <link rel="manifest" href="assets/site.webmanifest" />
+    <meta name="theme-color" content="#f5f7f9" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://haymon.ai/#website",
+            "name": "haymon",
+            "url": "https://haymon.ai/",
+            "publisher": { "@id": "https://haymon.ai/#organization" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://haymon.ai/#organization",
+            "name": "haymon",
+            "url": "https://haymon.ai/",
+            "logo": "https://haymon.ai/assets/android-chrome-512x512.png",
+            "email": "team@haymon.ai"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <svg class="sprite" width="0" height="0" aria-hidden="true">
+      <symbol id="lock" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zm6 3a1 1 0 1 0 2 0a1 1 0 0 0-2 0m-3-5V7a4 4 0 1 1 8 0v4"/></symbol>
+      <symbol id="filter" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4h16v2.172a2 2 0 0 1-.586 1.414L15 12v7l-6 2v-8.5L4.52 7.572A2 2 0 0 1 4 6.227z"/></symbol>
+      <symbol id="eye-off" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.585 10.587a2 2 0 0 0 2.829 2.828M16.681 16.673A8.7 8.7 0 0 1 12 18q-5.4 0-9-6q1.908-3.18 4.32-4.674m2.86-1.146A9 9 0 0 1 12 6q5.4 0 9 6q-1 1.665-2.138 2.87M3 3l18 18"/></symbol>
+      <symbol id="archive" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2m2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8m-9 4h4"/></symbol>
+      <symbol id="user-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 21v-2a4 4 0 0 1 4-4h2m10 1c0 4-2.5 6-3.5 6S15 20 15 16c1 0 2.5-.5 3.5-1.5c1 1 2.5 1.5 3.5 1.5M8 7a4 4 0 1 0 8 0a4 4 0 0 0-8 0"/></symbol>
+      <symbol id="menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M18 6L6 18M6 6l12 12"/></symbol>
+      <symbol id="arrow-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 12H5m6 6l-6-6m6-6l-6 6"/></symbol>
+      <symbol id="arrow-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M5 12h14m-6 6l6-6m-6-6l6 6"/></symbol>
+    </svg>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="haymon home">
+          <img src="assets/logo.svg" width="28" height="28" alt="" />
+          haymon
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="#control">Control</a>
+          <a href="#ecosystems">Ecosystems</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <a class="btn btn-primary header-cta" href="mailto:team@haymon.ai?subject=haymon%20early%20access">
+          Request access
+          <svg width="16" height="16"><use href="#arrow-right" /></svg>
+        </a>
+
+        <details class="menu">
+          <summary aria-label="Menu">
+            <svg class="icon-open" width="24" height="24"><use href="#menu" /></svg>
+            <svg class="icon-close" width="24" height="24"><use href="#x" /></svg>
+          </summary>
+          <div class="menu-panel">
+            <nav class="nav" aria-label="Primary (mobile)">
+              <a href="#control">Control</a>
+              <a href="#ecosystems">Ecosystems</a>
+              <a href="#architecture">Architecture</a>
+              <a href="#faq">FAQ</a>
+            </nav>
+            <a class="btn btn-primary" href="mailto:team@haymon.ai?subject=haymon%20early%20access">Request access</a>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container">
+          <h1>Control your software supply chain in the age of AI agents.</h1>
+          <p class="lede">
+            Developers and AI agents add dependencies faster than anyone can
+            review them. haymon is a private registry on your own server that
+            serves only the packages you've let in.
+          </p>
+
+          <div class="slider" data-slider>
+            <div class="frame">
+              <ul class="slides" tabindex="0" aria-label="Screenshots of the haymon interface">
+              <li class="slide" id="screen-packages" aria-label="1 of 6: Packages">
+                <div class="window">
+                  <div class="window-bar" aria-hidden="true">
+                    <span class="window-dots"><i></i><i></i><i></i></span>
+                    <span class="window-url">packages.acme.dev/packages</span>
+                  </div>
+                  <img
+                    src="assets/screens/packages-1440.webp"
+                    srcset="assets/screens/packages-720.webp 720w, assets/screens/packages-1440.webp 1440w, assets/screens/packages.webp 2880w"
+                    sizes="(min-width: 1440px) 1300px, (min-width: 1280px) calc(100vw - 136px), (min-width: 768px) calc(100vw - 72px), calc(100vw - 40px)"
+                    width="1440" height="900" loading="eager" fetchpriority="high" decoding="async"
+                    alt="The haymon packages overview"
+                  />
+                </div>
+              </li>
+              <li class="slide" id="screen-package" aria-label="2 of 6: Package details">
+                <div class="window">
+                  <div class="window-bar" aria-hidden="true">
+                    <span class="window-dots"><i></i><i></i><i></i></span>
+                    <span class="window-url">packages.acme.dev/packages/acme/payments-core</span>
+                  </div>
+                  <img
+                    src="assets/screens/package-1440.webp"
+                    srcset="assets/screens/package-720.webp 720w, assets/screens/package-1440.webp 1440w, assets/screens/package.webp 2880w"
+                    sizes="(min-width: 1440px) 1300px, (min-width: 1280px) calc(100vw - 136px), (min-width: 768px) calc(100vw - 72px), calc(100vw - 40px)"
+                    width="1440" height="900" loading="lazy" decoding="async"
+                    alt="The details page of the acme/payments-core package"
+                  />
+                </div>
+              </li>
+              <li class="slide" id="screen-sources" aria-label="3 of 6: Sources">
+                <div class="window">
+                  <div class="window-bar" aria-hidden="true">
+                    <span class="window-dots"><i></i><i></i><i></i></span>
+                    <span class="window-url">packages.acme.dev/sources</span>
+                  </div>
+                  <img
+                    src="assets/screens/sources-1440.webp"
+                    srcset="assets/screens/sources-720.webp 720w, assets/screens/sources-1440.webp 1440w, assets/screens/sources.webp 2880w"
+                    sizes="(min-width: 1440px) 1300px, (min-width: 1280px) calc(100vw - 136px), (min-width: 768px) calc(100vw - 72px), calc(100vw - 40px)"
+                    width="1440" height="900" loading="lazy" decoding="async"
+                    alt="The haymon sources overview"
+                  />
+                </div>
+              </li>
+              <li class="slide" id="screen-source" aria-label="4 of 6: Source details">
+                <div class="window">
+                  <div class="window-bar" aria-hidden="true">
+                    <span class="window-dots"><i></i><i></i><i></i></span>
+                    <span class="window-url">packages.acme.dev/sources/12</span>
+                  </div>
+                  <img
+                    src="assets/screens/source-1440.webp"
+                    srcset="assets/screens/source-720.webp 720w, assets/screens/source-1440.webp 1440w, assets/screens/source.webp 2880w"
+                    sizes="(min-width: 1440px) 1300px, (min-width: 1280px) calc(100vw - 136px), (min-width: 768px) calc(100vw - 72px), calc(100vw - 40px)"
+                    width="1440" height="900" loading="lazy" decoding="async"
+                    alt="The details page of the payments git source"
+                  />
+                </div>
+              </li>
+              <li class="slide" id="screen-users" aria-label="5 of 6: Users">
+                <div class="window">
+                  <div class="window-bar" aria-hidden="true">
+                    <span class="window-dots"><i></i><i></i><i></i></span>
+                    <span class="window-url">packages.acme.dev/users</span>
+                  </div>
+                  <img
+                    src="assets/screens/users-1440.webp"
+                    srcset="assets/screens/users-720.webp 720w, assets/screens/users-1440.webp 1440w, assets/screens/users.webp 2880w"
+                    sizes="(min-width: 1440px) 1300px, (min-width: 1280px) calc(100vw - 136px), (min-width: 768px) calc(100vw - 72px), calc(100vw - 40px)"
+                    width="1440" height="900" loading="lazy" decoding="async"
+                    alt="The haymon users overview"
+                  />
+                </div>
+              </li>
+              <li class="slide" id="screen-credentials" aria-label="6 of 6: Credentials">
+                <div class="window">
+                  <div class="window-bar" aria-hidden="true">
+                    <span class="window-dots"><i></i><i></i><i></i></span>
+                    <span class="window-url">packages.acme.dev/credentials</span>
+                  </div>
+                  <img
+                    src="assets/screens/credentials-1440.webp"
+                    srcset="assets/screens/credentials-720.webp 720w, assets/screens/credentials-1440.webp 1440w, assets/screens/credentials.webp 2880w"
+                    sizes="(min-width: 1440px) 1300px, (min-width: 1280px) calc(100vw - 136px), (min-width: 768px) calc(100vw - 72px), calc(100vw - 40px)"
+                    width="1440" height="900" loading="lazy" decoding="async"
+                    alt="The haymon credentials overview"
+                  />
+                </div>
+              </li>
+              </ul>
+            </div>
+
+            <div class="slider-info">
+              <div class="slider-captions" aria-live="polite">
+            <div class="slider-caption" data-for="screen-packages">
+              <p class="slider-title">Packages</p>
+              <p>Every package the registry serves, the source it came from, how many versions it holds and when it last changed. Search it, or import a whole lock file at once.</p>
+            </div>
+            <div class="slider-caption" data-for="screen-package" hidden>
+              <p class="slider-title">Package details</p>
+              <p>Versions, dependencies and dependents, license and source for each package, with the install command ready to copy and a one-click sync.</p>
+            </div>
+            <div class="slider-caption" data-for="screen-sources" hidden>
+              <p class="slider-title">Sources</p>
+              <p>Public registries and private git repositories, in the order haymon asks them. When two sources offer the same release, priority decides which one supplies it.</p>
+            </div>
+            <div class="slider-caption" data-for="screen-source" hidden>
+              <p class="slider-title">Source details</p>
+              <p>Each source shows the packages it supplies, its full catalog and its settings, from the repository URL to the credential it uses.</p>
+            </div>
+            <div class="slider-caption" data-for="screen-users" hidden>
+              <p class="slider-title">Users</p>
+              <p>Invite teammates, make them administrators or members, and deactivate access when someone leaves. Last-active times show who still uses the registry.</p>
+            </div>
+            <div class="slider-caption" data-for="screen-credentials" hidden>
+              <p class="slider-title">Credentials</p>
+              <p>Tokens, SSH keys and passwords for your private repositories, kept in one place and picked per source, with a count of where each one is used.</p>
+            </div>
+              </div>
+              <div class="slider-arrows">
+                <button type="button" class="slider-arrow" data-step="-1" aria-label="Previous screenshot">
+                  <svg width="20" height="20" aria-hidden="true"><use href="#arrow-left" /></svg>
+                </button>
+                <button type="button" class="slider-arrow" data-step="1" aria-label="Next screenshot">
+                  <svg width="20" height="20" aria-hidden="true"><use href="#arrow-right" /></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="control">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Control</p>
+              <h2>Nothing reaches your builds that you didn't let in.</h2>
+            </div>
+          </div>
+
+          <ul class="control-list">
+            <li class="card">
+              <span class="control-icon"><svg width="20" height="20" aria-hidden="true"><use href="#lock" /></svg></span>
+              <h3>A closed catalog</h3>
+              <p>
+                haymon serves the packages you imported and everything they
+                require. Any other name gets a 404.
+              </p>
+            </li>
+            <li class="card">
+              <span class="control-icon"><svg width="20" height="20" aria-hidden="true"><use href="#filter" /></svg></span>
+              <h3>Versions you allow</h3>
+              <p>
+                Set a version range on a package, and releases outside it are
+                never mirrored and can never be downloaded.
+              </p>
+            </li>
+            <li class="card">
+              <span class="control-icon"><svg width="20" height="20" aria-hidden="true"><use href="#eye-off" /></svg></span>
+              <h3>Private names stay private</h3>
+              <p>
+                A package from your own source is only ever fetched from it.
+                Public registries are never asked, so a squatter can't slip in.
+              </p>
+            </li>
+            <li class="card">
+              <span class="control-icon"><svg width="20" height="20" aria-hidden="true"><use href="#archive" /></svg></span>
+              <h3>Copies on your disk</h3>
+              <p>
+                Archives are served from your server once built, each with its
+                checksum recorded.
+              </p>
+            </li>
+            <li class="card">
+              <span class="control-icon"><svg width="20" height="20" aria-hidden="true"><use href="#user-shield" /></svg></span>
+              <h3>Clear roles</h3>
+              <p>
+                Only administrators add sources, credentials and users. Everyone
+                else browses packages and installs with their own token.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="ecosystems">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Ecosystems</p>
+              <h2>A truly universal home for all your packages.</h2>
+            </div>
+          </div>
+
+          <ul class="eco">
+            <li class="card eco-card">
+              <div class="eco-top">
+                <img class="eco-logo" src="assets/composer.svg" width="48" height="48" alt="Composer" />
+                <span class="badge badge-green">Available</span>
+              </div>
+              <h3>Composer <span>PHP</span></h3>
+              <ul>
+                <li>Composer v2 metadata protocol</li>
+                <li>Packagist and any Composer repository</li>
+                <li>GitHub, GitLab and git sources</li>
+              </ul>
+            </li>
+            <li class="card eco-card">
+              <div class="eco-top">
+                <img class="eco-logo" src="assets/npm.svg" width="48" height="48" alt="npm" />
+                <span class="badge badge-purple">Next</span>
+              </div>
+              <h3>npm <span>JavaScript</span></h3>
+              <p>
+                The next ecosystem on the platform, on the same sources,
+                credentials and access control.
+              </p>
+            </li>
+            <li class="card eco-card eco-more">
+              <div class="eco-top">
+                <span class="eco-logo eco-logo-empty" aria-hidden="true"></span>
+                <span class="badge">Planned</span>
+              </div>
+              <h3>More to follow</h3>
+              <p>
+                More languages and protocols will follow npm.
+                <a href="#access">Tell us which ones your team needs.</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Architecture</p>
+              <h2>Many sources in. One endpoint out.</h2>
+            </div>
+          </div>
+
+          <div class="flow">
+            <ul class="flow-col flow-in">
+              <li><strong>Public registries</strong><span>Mirrored upstream</span></li>
+              <li><strong>gitlab.acme.dev</strong><span>Git · GitLab token</span></li>
+              <li><strong>github.com/acme</strong><span>Git · SSH key</span></li>
+              <li><strong>Your own archives</strong><span>Hosted in haymon</span></li>
+            </ul>
+            <svg class="flow-lines" viewBox="0 0 100 400" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 50 C60 50 40 200 100 200" />
+              <path d="M0 150 C60 150 40 200 100 200" />
+              <path d="M0 250 C60 250 40 200 100 200" />
+              <path d="M0 350 C60 350 40 200 100 200" />
+            </svg>
+            <div class="flow-hub">
+              <div class="hub">
+                <span class="eyebrow">One endpoint</span>
+                <strong>haymon</strong>
+                <span>Your private registry</span>
+              </div>
+            </div>
+            <svg class="flow-lines" viewBox="0 0 100 400" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 200 C60 200 40 66.7 100 66.7" />
+              <path d="M0 200 L100 200" />
+              <path d="M0 200 C60 200 40 333.3 100 333.3" />
+            </svg>
+            <ul class="flow-col flow-out">
+              <li><strong>Developer machines</strong><span>Local installs</span></li>
+              <li><strong>CI pipelines</strong><span>Every build</span></li>
+              <li><strong>Deploys</strong><span>Production releases</span></li>
+            </ul>
+          </div>
+
+          <ul class="points">
+            <li>
+              <h3>Every release, one name</h3>
+              <p>
+                When a fork continues where the public registry stops, your
+                clients see the releases from both under the same package name.
+              </p>
+            </li>
+            <li>
+              <h3>Priority settles ties</h3>
+              <p>
+                When two sources offer the same release, the higher-priority
+                source supplies it.
+              </p>
+            </li>
+            <li>
+              <h3>Outages don't empty it</h3>
+              <p>
+                A source that's down keeps every release it already supplied, and
+                your builds keep installing them.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="container faq">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">FAQ</p>
+              <h2>Frequently asked questions</h2>
+            </div>
+          </div>
+
+          <div class="faq-list">
+            <details>
+              <summary>What is haymon?</summary>
+              <p>
+                A private package registry you run yourself. It mirrors the
+                packages you choose from public and private sources, and serves
+                only those to your developers, CI and AI agents.
+              </p>
+            </details>
+            <details>
+              <summary>Which sources can it mirror?</summary>
+              <p>
+                Any Composer repository such as packagist.org, git remotes on
+                GitHub, GitLab or anywhere else, inline <code>package</code>
+                definitions, and archives you host in haymon itself.
+              </p>
+            </details>
+            <details>
+              <summary>How do developers and CI authenticate?</summary>
+              <p>
+                Each user has one Composer token, used with <code>http-basic</code>
+                (username and token) or as a Bearer token. Users can regenerate
+                their own token at any time.
+              </p>
+            </details>
+            <details>
+              <summary>What does it take to run?</summary>
+              <p>
+                One binary and a storage directory. The database is SQLite, the web
+                interface is built in, and background jobs run in the same process.
+                Configuration is environment variables or a <code>.env</code> file.
+              </p>
+            </details>
+            <details>
+              <summary>Does it download every archive up front?</summary>
+              <p>
+                No. An archive is built or fetched the first time a client asks for
+                it, then served from disk. The first install of a new version waits
+                for that build; every one after it doesn't.
+              </p>
+            </details>
+            <details>
+              <summary>How do I get it?</summary>
+              <p>
+                haymon is in early access. <a href="#access">Request access</a> and
+                we'll get you set up.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section access" id="access">
+        <div class="container">
+          <p class="eyebrow">Early access</p>
+          <h2>Take control of your supply chain.</h2>
+          <p>haymon is in early access, starting with Composer. Tell us about your team and which ecosystems you need next.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="mailto:team@haymon.ai?subject=haymon%20early%20access">
+              Request access
+              <svg width="16" height="16"><use href="#arrow-right" /></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand" href="#top">
+          <img src="assets/logo.svg" width="22" height="22" alt="" />
+          haymon
+        </a>
+        <span>© 2026 haymon</span>
+      </div>
+    </footer>
+  </body>
+</html>

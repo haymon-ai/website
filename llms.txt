@@ -1,0 +1,23 @@
+# haymon
+
+> haymon is a private package registry you run on your own server. It serves only the packages you've let in, so developers, CI and AI agents install exactly what you approved.
+
+haymon mirrors public registries and private git repositories into one endpoint. Composer (PHP) is supported today; npm is next.
+
+- A closed catalog: only imported packages and their dependencies are served.
+- Version ranges per package: releases outside them are never mirrored.
+- Private package names are only fetched from their own source.
+- Archives are served from your server, each with its checksum recorded.
+- Administrators manage sources, credentials and users; everyone else installs with a personal token.
+- One binary on SQLite; no database server.
+
+haymon is in early access.
+
+## Site
+
+- [haymon.ai](https://haymon.ai/index.html.md): the landing page as markdown
+- [Request access](mailto:team@haymon.ai?subject=haymon%20early%20access): email the team
+
+## Optional
+
+- [Sitemap](https://haymon.ai/sitemap.xml)

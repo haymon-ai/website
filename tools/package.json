@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "playwright install chromium",
+    "screenshots": "node screenshots.mjs",
+    "og": "node og.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.63.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
