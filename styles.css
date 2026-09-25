@@ -1042,3 +1042,17 @@ li code {
 .site-footer .brand {
   font-size: 17px;
 }
+
+.made-in {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.made-in a {
+  display: flex;
+}
+
+.made-in .heart {
+  color: #b51f1f; /* the Tirol logo's red */
+}
