@@ -2,7 +2,7 @@
 
 > haymon is a private package registry you run on your own server. It serves only the packages you've let in, so developers, CI and AI agents install exactly what you approved.
 
-haymon mirrors public registries and private git repositories into one endpoint. Composer (PHP) is supported today; npm is next.
+haymon mirrors public registries and private git repositories into one catalog, served through spaces that each have their own endpoint and tokens. Composer (PHP) is supported today; npm is next.
 
 - A closed catalog: only imported packages and their dependencies are served.
 - Version ranges per package: releases outside them are never mirrored.

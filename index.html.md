@@ -27,9 +27,9 @@ Developers and AI agents add dependencies faster than anyone can review them. ha
 - **npm (JavaScript)**, next: the next ecosystem on the platform, on the same sources, credentials and access control.
 - **More to follow**, planned: more languages and protocols will follow npm. [Tell us which ones your team needs.](mailto:team@haymon.ai?subject=haymon%20early%20access)
 
-## Architecture: many sources in, one endpoint out
+## Architecture: many sources in, one catalog, many spaces
 
-Sources (public registries, git repositories with a GitLab token or SSH key, and archives hosted in haymon) feed one private registry endpoint, which serves developer machines, CI pipelines and production deploys.
+Sources (public registries, git repositories with a GitLab token or SSH key, and archives hosted in haymon) feed one private catalog. Spaces serve it: each is its own endpoint with its own tokens, so developers, CI and deploys, and customers each install from theirs.
 
 - **Every release, one name**: When a fork continues where the public registry stops, your clients see the releases from both under the same package name.
 - **Priority settles ties**: When two sources offer the same release, the higher-priority source supplies it.
