@@ -8,7 +8,8 @@ haymon mirrors public registries and private git repositories into one endpoint.
 - Version ranges per package: releases outside them are never mirrored.
 - Private package names are only fetched from their own source.
 - Archives are served from your server, each with its checksum recorded.
-- Administrators manage sources, credentials and users; everyone else installs with a personal token.
+- Administrators manage sources, credentials, users and spaces; everyone else installs with a personal token.
+- Spaces give each team or customer its own address and tokens, reaching every package or only a chosen list.
 - One binary on SQLite; no database server.
 
 haymon is in early access.

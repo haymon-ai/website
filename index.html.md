@@ -8,7 +8,8 @@ Developers and AI agents add dependencies faster than anyone can review them. ha
 - **Package details**: Versions, dependencies and dependents, license and source for each package, with the install command ready to copy and a one-click sync.
 - **Sources**: Public registries and private git repositories, in the order haymon asks them. When two sources offer the same release, priority decides which one supplies it.
 - **Source details**: Each source shows the packages it supplies, its full catalog and its settings, from the repository URL to the credential it uses.
-- **Users**: Invite teammates, make them administrators or members, and deactivate access when someone leaves. Last-active times show who still uses the registry.
+- **Spaces**: Give each team or customer its own address and tokens. A space serves every package or only the ones on its list, and its tokens open no other space.
+- **Users**: Invite teammates, make them owners, administrators or users, and deactivate access when someone leaves. Last-active times show who still uses the registry.
 - **Credentials**: Tokens, SSH keys and passwords for your private repositories, kept in one place and picked per source, with a count of where each one is used.
 
 ## Control: nothing reaches your builds that you didn't let in
@@ -17,7 +18,8 @@ Developers and AI agents add dependencies faster than anyone can review them. ha
 - **Versions you allow**: Set a version range on a package, and releases outside it are never mirrored and can never be downloaded.
 - **Private names stay private**: A package from your own source is only ever fetched from it. Public registries are never asked, so a squatter can't slip in.
 - **Copies on your disk**: Archives are served from your server once built, each with its checksum recorded.
-- **Clear roles**: Only administrators add sources, credentials and users. Everyone else browses packages and installs with their own token.
+- **Clear roles**: Only administrators add sources, credentials, users and spaces. Everyone else browses packages and installs with their own token.
+- **Separate spaces**: Give each team or customer its own address and tokens, serving every package or only a list you choose. A token for one space opens no other.
 
 ## Ecosystems: a truly universal home for all your packages
 
